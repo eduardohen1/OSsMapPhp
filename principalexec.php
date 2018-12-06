@@ -17,6 +17,14 @@
   <script type="text/javascript" src="js/sweetalert2.js"></script>
    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+   	<!-- https://goo.gl/OOhYW5 -->
+	<link rel="manifest" href="manifest.json">
+
+  <!-- https://goo.gl/qRE0vM -->
+  <meta name="theme-color" content="#607fbe">
+
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script> -->
 	<style type="text/css">
         .well-shadow {  -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777; }
     </style>
@@ -43,12 +51,13 @@
     try {      
       $conn = new PDO("mysql:host=$host;dbname=$banco;port=$vvPortBanco", $login, $senha);	    
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
-      $vSQL = "SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 3 order by vServico ASC";
+      $vSQL = "SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, DATE_FORMAT(dt_baixa,'%d/%m/%Y') vDtBaixa, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 3 order by vServico ASC";
       $stmt = $conn->query($vSQL);
       while($vControle  = $stmt->fetch()){		
         $vvServico       = $vControle["vServico"];
         $vvSolicitante   = $vControle["solicitante"];
         $vvDtSolicitacao = $vControle["vDtSolicitacao"];        
+        $vvDtBaixa       = $vControle["vDtBaixa"];        
         $vvNumOs         = $vControle["num_os"] ;
         $vvAnoOs         = $vControle["ano_os"];
         $vvLinkExecutar  = "<a href='javascript:concluirOS(".$vvNumOs.",".$vvAnoOs.")' class='btn btn-success'><span class='glyphicon glyphicon-check' aria-hidden='true'></span></a>";        
@@ -62,7 +71,7 @@
         $resposta .= "<td>".remover_caracter($vvServico)."</td>";
         $resposta .= "<td>".remover_caracter($vvSolicitante)."</td>";
         $resposta .= "<td class='text-center'>".$vvDtSolicitacao."</td>";
-        //$resposta .= "<td class='text-center'>".$vvLinkExecutar."</td>";
+        $resposta .= "<td class='text-center'>".$vvDtBaixa."</td>";
         $resposta .= "<td class='text-center'>".$vvLinkGeo."</td>";
         //$resposta .= "<td class='text-center'>".$vvLinkCancelar."</td>";
         $resposta .= "</tr>";        
@@ -149,7 +158,7 @@
                   <th class="text-center col-md-4">Servi&ccedil;o</th>
                   <th class="text-center col-md-3">Solicitante</th>
                   <th class="text-center col-md-2">Dt solicita&ccedil;&atilde;o</th>
-                  <!-- <th class="text-center col-md-1">Executar</th>-->
+                  <th class="text-center col-md-1">Dt execu&ccedil;&atilde;o</th>
                   <th class="text-center col-md-1">Geo</th>
                   <!-- <th class="text-center col-md-1">Cancelar</th> -->
                 </tr>
@@ -201,7 +210,7 @@
         cancelButtonText: 'N&atilde;o'
       }).then((result) => {
         if (result.value) {
-          window.location.replace("concluiros.php?numos=".numOs."&anoos=".anoOs);
+          window.location.replace("concluiros.php?numos="+numOs+"&anoos="+anoOs);
         }
       });
     }

@@ -14,6 +14,14 @@
    <script type="text/javascript" src="js/sweetalert2.js"></script>
    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+   	<!-- https://goo.gl/OOhYW5 -->
+	<link rel="manifest" href="manifest.json">
+
+    <!-- https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#607fbe">
+
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script> -->
 	<style type="text/css">
         .well-shadow {  -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777; }
     </style>

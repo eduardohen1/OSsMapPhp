@@ -1,0 +1,20 @@
+{
+   "name": "OSsMap - Sistema de Ordens de Serviços",
+   "short_name": "OSsMap",
+   "icons": [
+     {
+       "src": "/images/OSsMap192x192.png",
+       "sizes": "192x192",
+       "type": "image/png"
+     },
+     {
+       "src": "/images/manifest/OSsMap512x512.png",
+       "sizes": "512x512",
+       "type": "image/png"
+     }
+   ],
+   "display": "standalone",
+   "start_url": "/",
+   "background_color": "#607fbe",
+   "theme_color": "#607fbe"
+ }
