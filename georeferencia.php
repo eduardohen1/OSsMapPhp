@@ -108,7 +108,7 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h2>Georeferencia/h2>
+        <h2>Georeferencia</h2>
         <p>&nbsp;</p>
         <p>
          <div id="mapholder"></div>
@@ -222,8 +222,5 @@ function showError(error)
     }
   }
 </script>
-
-
-Read more: http://www.linhadecodigo.com.br/artigo/3653/usando-geolocalizacao-com-html5.aspx#ixzz5YvKxy0ns
 </body>
 </html>
