@@ -43,7 +43,7 @@
   $conexaoSysCliente = "";
 
 ?>
-<body style="padding: 50px 0; background-color: #607fbe;" onload="getLocation()">
+<body style="padding: 50px 0; background-color: #607fbe;">
 	<?php		
 		$vvMensagem = "<strong>".$vvMensagem."</strong><br />Rotinas de suporte para gerenciamento do Sistema de Gest&atilde;o Comercial."		
 	?>
@@ -111,6 +111,8 @@
         <h2>Georeferencia</h2>
         <p>&nbsp;</p>
         <p>
+        <p id="demo">Clique no botão para obter sua localização:</p>
+        <button onclick="getLocation()">Clique aqui</button>
          <div id="mapholder"></div>
         </p>
 		  </div>
@@ -175,6 +177,7 @@
 
   </script>
   <script>
+var x=document.getElementById("demo");
 function getLocation()
   {
   if (navigator.geolocation)
