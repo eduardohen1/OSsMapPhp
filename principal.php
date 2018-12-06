@@ -18,10 +18,44 @@
   ob_start();
   session_start();
 
-  $vvNomeUsuario = $_SESSION['nomeUsuario'];
-	$vvTipoUsuario = $_SESSION['tipoUsuario'];
-  $vvMensagem    = $_SESSION['mensagem'];
-  
+  $vvNomeUsuario     = $_SESSION['nomeUsuario'];
+	$vvTipoUsuario     = $_SESSION['tipoUsuario'];
+  $vvMensagem        = $_SESSION['mensagem'];
+  $conn              = "";
+  $conexaoSysCliente = "";
+
+  require_once('conexao.php');
+  function buscaOs(){
+    $resposta = "";
+    try {
+      $stmt = $conexaoSysCliente->query("SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 1 order by vServico ASC");
+      while($vControle  = $stmt->fetch()){		
+        $vvServico = $vControle["vServico"];
+        $vvSolicitante = $vControle["solicitante"];
+        $vvDtSolicitacao = $vControle["vDtSolicitacao"];
+        $vvLinkExecutar = "<a href='concluiros.php?numos=".$vControle["num_os"]."&anoos=".$vControle["ano_os"]."' class='btn btn-success'><span class='glyphicon glyphicon-check' aria-hidden='true'></span></a>";
+        if($vControle["num_os"] == 155){
+          $vvLinkGeo = "<a href='#' class='btn btn-info' data-toggle="modal" data-target='#myModal'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
+        }else{
+          $vvLinkGeo = "<a href='#' class='btn btn-info'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
+        }
+        $vvLinkCancelar = "<a href='cancelaros.php?numos=".$vControle["num_os"]."&anoos=".$vControle["ano_os"]."' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";        
+        $resposta .= "<tr>";
+        $resposta .= "<td>".$vvServico."</td>";
+        $resposta .= "<td>".$vvSolicitante."</td>";
+        $resposta .= "<td class='text-center'>".$vvDtSolicitacao."</td>";
+        $resposta .= "<td class='text-center'>".$vvLinkExecutar."</td>";
+        $resposta .= "<td class='text-center'>".$vvLinkGeo."</td>";
+        $resposta .= "<td class='text-center'>".$vvLinkCancelar."</td>";
+        $resposta .= "</tr>";
+      }
+      if(strlen($resposta) == 0) $resposta = "<tr><td colspan='6'>Nenhum registro encontrado!</td></tr>";
+    }catch(PDOException $e){
+      $resposta = "<tr><td colspan='6'>Erro ao pesquisar: ".$e->getMessage()."</td></tr>";
+    }
+    return $resposta;
+  }
+
 ?>
 <body style="padding: 50px 0; background-color: #607fbe;">
 	<?php		
@@ -104,30 +138,10 @@
                 </tr>
               </thead>
               <tbody id='tbListaUsuario'>
-                <tr>
-                  <td>Liga&ccedil;&atilde;o nova 00155.2018-2</td>
-                  <td>Nononononono</td>
-                  <td class="text-center">15/11/2018</td>
-                  <td class="text-center"><a href='#' class='btn btn-success'><span class="glyphicon glyphicon-check" aria-hidden="true"></span></a></td>
-                  <td class="text-center"><a href='#' class='btn btn-info' data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></td>
-                  <td class="text-center"><a href='#' class='btn btn-danger'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
-                </tr>
-                <tr>
-                  <td>Vazamento 02020.2018-X</td>
-                  <td>Fulando Beltrano Junior</td>
-                  <td class="text-center">20/11/2018</td>
-                  <td class="text-center"><a href='#' class='btn btn-success'><span class="glyphicon glyphicon-check" aria-hidden="true"></span></a></td>
-                  <td class="text-center"><a href='#' class='btn btn-info'><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></td>
-                  <td class="text-center"><a href='#' class='btn btn-danger'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
-                </tr>
-                <tr>
-                  <td>Liga&ccedil;&atilde;o nova 00156.2018-8</td>
-                  <td>Maria Teste Beltrano</td>
-                  <td class="text-center">12/11/2018</td>
-                  <td class="text-center"><a href='#' class='btn btn-success'><span class="glyphicon glyphicon-check" aria-hidden="true"></span></a></td>
-                  <td class="text-center"><a href='#' class='btn btn-info'><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></td>
-                  <td class="text-center"><a href='#' class='btn btn-danger'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
-                </tr>
+                <?php
+                  $tabela = buscaOs();
+                  echo($tabela);
+                ?>                
               </tbody>
             </table>
           </div>

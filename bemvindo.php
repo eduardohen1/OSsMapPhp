@@ -31,7 +31,7 @@
          Swal({
             title: 'OSsMap - Sistema de Ordens de Servi&ccedil;os',
             text: '<?php echo($vvMensagem); ?>',
-            imageUrl: '/images/OSsMap.png',
+            imageUrl: 'images/OSsMap.png',
             imageWidth: 400,
             imageHeight: 200,
             imageAlt: 'OSsMap',
