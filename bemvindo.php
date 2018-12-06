@@ -25,23 +25,19 @@
    $vvMensagem    = $_SESSION['mensagem'];
 ?>
 <body style="padding: 50px 0; background-color: #607fbe;" onload="mensagemBemVindo();">
-   <table width="100%" border="0">
-      <tr>
-         <td align="center"><img src="images/OSsMap2.png" alt="" class="img-responsive" height="100px" width="400px" /></td>
-      </tr>
-   </table>
+   &nbsp;
    <script type="text/javascript">
       function mensagemBemVindo(){
          Swal({
             title: 'OSsMap - Sistema de Ordens de Servi&ccedil;os',
             text: '<?php echo($vvMensagem); ?>',
-            imageUrl: 'url(/images/OSsMap.png)',
+            imageUrl: '/images/OSsMap.png',
             imageWidth: 400,
             imageHeight: 200,
             imageAlt: 'OSsMap',
             animation: false
          });
-         //window.location.replace("principal.php");
+         window.location.replace("principal.php");
       }
    </script>
 </body>
