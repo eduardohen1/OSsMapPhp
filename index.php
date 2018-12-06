@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>		
 	<!-- https://goo.gl/OOhYW5 -->
-	<link rel="manifest" href="/manifest.json">
+	<link rel="manifest" href="manifest.json">
 
 	<!-- https://goo.gl/qRE0vM -->
 	<meta name="theme-color" content="#607fbe">

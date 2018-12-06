@@ -19,7 +19,7 @@
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
   <!-- https://goo.gl/OOhYW5 -->
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
 
   <!-- https://goo.gl/qRE0vM -->
   <meta name="theme-color" content="#607fbe">
