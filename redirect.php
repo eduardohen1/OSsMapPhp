@@ -24,7 +24,8 @@
 					$_SESSION['role'] = $vRole;
 					$_SESSION['nomeUsuario'] = $vvNome;
 					$_SESSION['tipoUsuario'] = $vTipoUsuario;
-					header("location:principal.php");
+					//header("location:principal.php");
+					header("location:bemvindo.php");
 				}else{
 					$_SESSION['erro'] = "Senha n&atilde;o confere.";
 					header("location:index.php");
