@@ -15,16 +15,19 @@
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/sweetalert2.js"></script>
-   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-   	<!-- https://goo.gl/OOhYW5 -->
-	<link rel="manifest" href="manifest.json">
+  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+  <!-- https://goo.gl/OOhYW5 -->
+  <link rel="manifest" href="manifest.json">
 
   <!-- https://goo.gl/qRE0vM -->
   <meta name="theme-color" content="#607fbe">
 
   <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script> -->
+
 	<style type="text/css">
         .well-shadow {  -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777; }
     </style>
@@ -39,51 +42,8 @@
   $conn              = "";
   $conexaoSysCliente = "";
 
-  function buscaOs(){
-    $host        = "autoatendimento.prosanearinfo.com.br";
-    $login       = "autoatendimento";
-    $senha       = "gest@123mgf";
-    $banco       = "ossmap";
-    $vvPortBanco = "3309";
-    $conn        = "";
-
-    $resposta = "";
-    try {      
-      $conn = new PDO("mysql:host=$host;dbname=$banco;port=$vvPortBanco", $login, $senha);	    
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
-      $vSQL = "SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, DATE_FORMAT(dt_baixa,'%d/%m/%Y') vDtBaixa, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 3 order by vServico ASC";
-      $stmt = $conn->query($vSQL);
-      while($vControle  = $stmt->fetch()){		
-        $vvServico       = $vControle["vServico"];
-        $vvSolicitante   = $vControle["solicitante"];
-        $vvDtSolicitacao = $vControle["vDtSolicitacao"];        
-        $vvDtBaixa       = $vControle["vDtBaixa"];        
-        $vvNumOs         = $vControle["num_os"] ;
-        $vvAnoOs         = $vControle["ano_os"];
-        $vvLinkExecutar  = "<a href='javascript:concluirOS(".$vvNumOs.",".$vvAnoOs.")' class='btn btn-success'><span class='glyphicon glyphicon-check' aria-hidden='true'></span></a>";        
-        if($vvNumOs == 155){
-          $vvLinkGeo = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
-        }else{
-          $vvLinkGeo = "<a href='#' class='btn btn-info'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
-        }        
-        $vvLinkCancelar = "<a href='cancelaros.php?numos=".$vvNumOs."&anoos=".$vvAnoOs."' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
-        $resposta .= "<tr>";
-        $resposta .= "<td>".remover_caracter($vvServico)."</td>";
-        $resposta .= "<td>".remover_caracter($vvSolicitante)."</td>";
-        $resposta .= "<td class='text-center'>".$vvDtSolicitacao."</td>";
-        $resposta .= "<td class='text-center'>".$vvDtBaixa."</td>";
-        $resposta .= "<td class='text-center'>".$vvLinkGeo."</td>";
-        //$resposta .= "<td class='text-center'>".$vvLinkCancelar."</td>";
-        $resposta .= "</tr>";        
-      }
-      if(strlen($resposta) == 0) $resposta = "<tr><td colspan='4'>Nenhum registro encontrado!</td></tr>";
-    }catch(PDOException $e){
-      $resposta = "<tr><td colspan='4'>Erro ao pesquisar: ".$e->getMessage()."</td></tr>";
-    }
-    return $resposta;
-  }
 ?>
-<body style="padding: 50px 0; background-color: #607fbe;">
+<body style="padding: 50px 0; background-color: #607fbe;" onload="getLocation()">
 	<?php		
 		$vvMensagem = "<strong>".$vvMensagem."</strong><br />Rotinas de suporte para gerenciamento do Sistema de Gest&atilde;o Comercial."		
 	?>
@@ -103,7 +63,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">              
-              <li class="dropdown active">
+              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rotinas de trabalho<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <?php
@@ -122,7 +82,7 @@
                 </ul>
               </li>
 			  <?php			  
-			  	echo ("<li ><a href='georeferencia.php'>Georefer&ecirc;ncia</a></li>");
+			  	echo ("<li class='active'><a href='georeferencia.php'>Georefer&ecirc;ncia</a></li>");
 				  echo ("<li ><a href='configuracoes.php'>Configura&ccedil;&otilde;es</a></li>");			  
 			  ?>
             </ul>
@@ -148,29 +108,10 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h2>Ordens de Servi&ccedil;o - Executadas</h2>
+        <h2>Georeferencia/h2>
         <p>&nbsp;</p>
         <p>
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th class="text-center col-md-4">Servi&ccedil;o</th>
-                  <th class="text-center col-md-3">Solicitante</th>
-                  <th class="text-center col-md-2">Dt solicita&ccedil;&atilde;o</th>
-                  <th class="text-center col-md-1">Dt execu&ccedil;&atilde;o</th>
-                  <th class="text-center col-md-1">Geo</th>
-                  <!-- <th class="text-center col-md-1">Cancelar</th> -->
-                </tr>
-              </thead>
-              <tbody id='tbListaUsuario'>
-                <?php
-                  $tabela = buscaOs();
-                  echo($tabela);
-                ?>                
-              </tbody>
-            </table>
-          </div>
+         <div id="mapholder"></div>
         </p>
 		  </div>
     </div> <!-- /container -->
@@ -210,12 +151,79 @@
         cancelButtonText: 'N&atilde;o'
       }).then((result) => {
         if (result.value) {
-          window.location.replace("concluiros.php?numos="+numOs+"&anoos="+anoOs);
+          window.location.replace("concluiros.php?numos=" + numOs + "&anoos=" + anoOs);
         }
       });
     }
 
+    function cancelarOS(numOs, anoOs){
+      Swal({
+        title: 'Cancelar OS?',
+        text: "Deseja cancelar esta OS?",
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'N&atilde;o'
+      }).then((result) => {
+        if (result.value) {
+          window.location.replace("cancelaros.php?numos=" + numOs + "&anoos=" + anoOs);
+        }
+      });
+    }
 
   </script>
+  <script>
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition,showError);
+    }
+  else{x.innerHTML="Geolocalização não é suportada nesse browser.";}
+  }
+ 
+function showPosition(position)
+  {
+  lat=position.coords.latitude;
+  lon=position.coords.longitude;
+  latlon=new google.maps.LatLng(lat, lon)
+  mapholder=document.getElementById('mapholder')
+  mapholder.style.height='250px';
+  mapholder.style.width='500px';
+ 
+  var myOptions={
+  center:latlon,zoom:14,
+  mapTypeId:google.maps.MapTypeId.ROADMAP,
+  mapTypeControl:false,
+  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+  };
+  var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+  var marker=new google.maps.Marker({position:latlon,map:map,title:"Você está Aqui!"});
+  }
+ 
+function showError(error)
+  {
+  switch(error.code)
+    {
+    case error.PERMISSION_DENIED:
+      x.innerHTML="Usuário rejeitou a solicitação de Geolocalização."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML="Localização indisponível."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML="O tempo da requisição expirou."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML="Algum erro desconhecido aconteceu."
+      break;
+    }
+  }
+</script>
+
+
+Read more: http://www.linhadecodigo.com.br/artigo/3653/usando-geolocalizacao-com-html5.aspx#ixzz5YvKxy0ns
 </body>
 </html>

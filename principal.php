@@ -113,8 +113,8 @@
                       echo("<li role='separator' class='divider'></li>");
                     }
                   ?>
-                  <li><a href="osexecutar.php">Ordens de Servi&ccedil;o - Executar</a></li>
-                  <li><a href="osexecutadas.php">Ordens de Servi&ccedil;o - Executadas</a></li>                  
+                  <li><a href="principal.php">Ordens de Servi&ccedil;o - Executar</a></li>
+                  <li><a href="principalexec.php">Ordens de Servi&ccedil;o - Executadas</a></li>                  
                 </ul>
               </li>
               <li class="dropdown">
@@ -123,7 +123,7 @@
                 </ul>
               </li>
 			  <?php			  
-			  	echo ("<li ><a href='diagnosticoClientes.php'>Georefer&ecirc;ncia</a></li>");
+			  	echo ("<li ><a href='georeferencia.php'>Georefer&ecirc;ncia</a></li>");
 				  echo ("<li ><a href='configuracoes.php'>Configura&ccedil;&otilde;es</a></li>");			  
 			  ?>
             </ul>
