@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/sweetalert2.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyB4ZCDyERah8If-1hhw37Dz7bJpNtcwWB0"></script>
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
