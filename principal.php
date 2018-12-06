@@ -27,9 +27,9 @@
   require_once('conexao.php');
   function buscaOs(){
     $resposta = "";
-    try {
-      /*
+    try {      
       $stmt = $conn->query("SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 1 order by vServico ASC");
+      /*
       while($vControle  = $stmt->fetch()){		
         $vvServico = $vControle["vServico"];
         $vvSolicitante = $vControle["solicitante"];
