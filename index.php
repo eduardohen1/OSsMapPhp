@@ -51,7 +51,7 @@
 		$_SESSION["erro"] = "";
 	}
 ?>
-<body style="padding: 50px 0;" bgcolor="#607fbe">
+<body style="padding: 50px 0; background-color: #607fbe;">
 	
 	<div class="container">
     	<div class="row">

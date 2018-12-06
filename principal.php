@@ -23,7 +23,7 @@
   $vvMensagem    = $_SESSION['mensagem'];
   
 ?>
-<body style="padding: 50px 0; background-color: #607fbe;">	
+<body style="padding: 50px 0; background-color: #607fbe;">
 	<?php		
 		$vvMensagem = "<strong>".$vvMensagem."</strong><br />Rotinas de suporte para gerenciamento do Sistema de Gest&atilde;o Comercial."		
 	?>
@@ -46,8 +46,14 @@
               <li class="dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rotinas de trabalho<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="diagnostico.php">Ordens de Servi&ccedil;o - Executar</a></li>
-                  <li><a href="diagnostico.php">Ordens de Servi&ccedil;o - Executadas</a></li>                  
+                  <?php
+                    if($vvTipoUsuario == 1){
+                      echo("<li><a href='cados.php'>Cadastrar nova Ordem de Servi&ccedil;o</a></li>");
+                      echo("<li role='separator' class='divider'></li>");
+                    }
+                  ?>
+                  <li><a href="osexecutar.php">Ordens de Servi&ccedil;o - Executar</a></li>
+                  <li><a href="osexecutadas.php">Ordens de Servi&ccedil;o - Executadas</a></li>                  
                 </ul>
               </li>
               <li class="dropdown">
@@ -65,17 +71,14 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo($vvNomeUsuario); ?><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <?php
-				  	        if($vvTipoUsuario == 0){
-						          echo("<li><a href='altSenha.php'>Alterar senha</a></li>");
-						          echo("<li role='separator' class='divider'></li>");
-                    }else{
+                    echo("<li><a href='altSenha.php'>Alterar senha</a></li>");
+						        echo("<li role='separator' class='divider'></li>");
+				  	        if($vvTipoUsuario == 1){
                       echo("<li><a href='cadusuario.php'>Cadastrar usu&aacute;rios</a></li>");
+                      echo("<li role='separator' class='divider'></li>");
                     }
                   ?>
-				  <li><a href="logout.php">Sair do sistema</a></li>
-                  <!--<li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>-->
+				          <li><a href="logout.php">Sair do sistema</a></li>                  
                 </ul>
               </li>
             </ul>
