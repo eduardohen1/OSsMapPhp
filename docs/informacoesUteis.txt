@@ -4,3 +4,5 @@ docker run --name server -itd -p 8080:80 eduardohmferreira/php-nginx
 docker attach server
 -- saindo da máquina sem desliga-la
 ctrl + p e q
+-- cor fundo
+#607fbe
