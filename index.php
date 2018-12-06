@@ -64,14 +64,14 @@
                         	<label for="Login" class="sr-only">Usu&aacute;rio</label>
                         	<div class="input-group">
                             	<div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
-                            	<input type="text" id="Login" name="Login" class="form-control" placeholder="Usu&aacute;rio" required autofocus>
+                            	<input type="text" id="username" name="username" class="form-control" placeholder="Usu&aacute;rio" required autofocus>
                         	</div>
                     	</div>
                     	<div class="form-group">
                         	<label for="Password" class="sr-only">Senha</label>
 	                        <div class="input-group">
 								<div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
-								<input type="password" id="Password" name="Password" class="form-control" placeholder="Senha" required>
+								<input type="password" id="password" name="password" class="form-control" placeholder="Senha" required>
 							</div>
 						</div>
 						<button class="btn btn-lg btn-primary btn-block" type="submit" >
