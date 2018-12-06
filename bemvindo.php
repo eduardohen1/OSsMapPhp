@@ -36,8 +36,11 @@
             imageHeight: 200,
             imageAlt: 'OSsMap',
             animation: false
-         });
-         window.location.replace("principal.php");
+         }).then(
+            (result) =>{
+               window.location.replace("principal.php");
+            }
+         );         
       }
    </script>
 </body>
