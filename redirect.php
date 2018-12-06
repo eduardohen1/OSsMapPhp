@@ -11,7 +11,7 @@
 			//$conn = new PDO("mysql:host=$vvEndeBanco;dbname=$vvNomeBanco;port=$vvPortBanco", $vvUserBanco, $vvPassBanco);
 			// set the PDO error mode to exception
 			//$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
-			$vSQL = "SELECT u.*  FROM usuario u WHERE u.username = '".ltrim(rtrim($vvUsuario))."' AND u.enabled = 1";
+			$vSQL = "SELECT u.*  FROM usuario u WHERE u.login = '".ltrim(rtrim($vvUsuario))."' AND u.enabled = 1";
 			$stmt = $conn->query($vSQL);
 			if($vUsuario  = $stmt->fetch()){
 				$vvUsuarioID  = $vUsuario["id"];
