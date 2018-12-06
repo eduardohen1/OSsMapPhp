@@ -58,8 +58,7 @@
         $resposta .= "<td class='text-center'>".$vvLinkExecutar."</td>";
         $resposta .= "<td class='text-center'>".$vvLinkGeo."</td>";
         $resposta .= "<td class='text-center'>".$vvLinkCancelar."</td>";
-        $resposta .= "</tr>";
-        */
+        $resposta .= "</tr>";        
       }
       if(strlen($resposta) == 0) $resposta = "<tr><td colspan='6'>Nenhum registro encontrado!</td></tr>";
     }catch(PDOException $e){
