@@ -14,7 +14,16 @@
         .well-shadow {  -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777; }
     </style>
 </head>
-<body style="padding: 50px 0;" bgcolor="#607fbe">	
+<?php
+  ob_start();
+  session_start();
+
+  $vvNomeUsuario = $_SESSION['nomeUsuario'];
+	$vvTipoUsuario = $_SESSION['tipoUsuario'];
+  $vvMensagem    = $_SESSION['mensagem'];
+  
+?>
+<body style="padding: 50px 0; background-color: #607fbe;">	
 	<?php		
 		$vvMensagem = "<strong>".$vvMensagem."</strong><br />Rotinas de suporte para gerenciamento do Sistema de Gest&atilde;o Comercial."		
 	?>
@@ -53,14 +62,16 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo("Administrador"); ?><span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo($vvNomeUsuario); ?><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <?php
-				  	if($vvTipoUsuario != 0){
-						echo("<li><a href='altSenha.php'>Alterar senha</a></li>");
-						echo("<li role='separator' class='divider'></li>");
-					}
-				  ?>
+				  	        if($vvTipoUsuario == 0){
+						          echo("<li><a href='altSenha.php'>Alterar senha</a></li>");
+						          echo("<li role='separator' class='divider'></li>");
+                    }else{
+                      echo("<li><a href='cadusuario.php'>Cadastrar usu&aacute;rios</a></li>");
+                    }
+                  ?>
 				  <li><a href="logout.php">Sair do sistema</a></li>
                   <!--<li><a href="#">Another action</a></li>
                   <li><a href="#">Something else here</a></li>
