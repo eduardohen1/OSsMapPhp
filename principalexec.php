@@ -43,7 +43,7 @@
     try {      
       $conn = new PDO("mysql:host=$host;dbname=$banco;port=$vvPortBanco", $login, $senha);	    
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
-      $vSQL = "SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 1 order by vServico ASC";
+      $vSQL = "SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 3 order by vServico ASC";
       $stmt = $conn->query($vSQL);
       while($vControle  = $stmt->fetch()){		
         $vvServico       = $vControle["vServico"];
@@ -57,19 +57,19 @@
         }else{
           $vvLinkGeo = "<a href='#' class='btn btn-info'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
         }        
-        $vvLinkCancelar = "<a href='javascript:cancelarOS(".$vvNumOs.",".$vvAnoOs.")' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
+        $vvLinkCancelar = "<a href='cancelaros.php?numos=".$vvNumOs."&anoos=".$vvAnoOs."' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
         $resposta .= "<tr>";
         $resposta .= "<td>".remover_caracter($vvServico)."</td>";
         $resposta .= "<td>".remover_caracter($vvSolicitante)."</td>";
         $resposta .= "<td class='text-center'>".$vvDtSolicitacao."</td>";
-        $resposta .= "<td class='text-center'>".$vvLinkExecutar."</td>";
+        //$resposta .= "<td class='text-center'>".$vvLinkExecutar."</td>";
         $resposta .= "<td class='text-center'>".$vvLinkGeo."</td>";
-        $resposta .= "<td class='text-center'>".$vvLinkCancelar."</td>";
+        //$resposta .= "<td class='text-center'>".$vvLinkCancelar."</td>";
         $resposta .= "</tr>";        
       }
-      if(strlen($resposta) == 0) $resposta = "<tr><td colspan='6'>Nenhum registro encontrado!</td></tr>";
+      if(strlen($resposta) == 0) $resposta = "<tr><td colspan='4'>Nenhum registro encontrado!</td></tr>";
     }catch(PDOException $e){
-      $resposta = "<tr><td colspan='6'>Erro ao pesquisar: ".$e->getMessage()."</td></tr>";
+      $resposta = "<tr><td colspan='4'>Erro ao pesquisar: ".$e->getMessage()."</td></tr>";
     }
     return $resposta;
   }
@@ -139,7 +139,7 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h2>Ordens de Servi&ccedil;o - Executar</h2>
+        <h2>Ordens de Servi&ccedil;o - Executadas</h2>
         <p>&nbsp;</p>
         <p>
           <div class="table-responsive">
@@ -149,9 +149,9 @@
                   <th class="text-center col-md-4">Servi&ccedil;o</th>
                   <th class="text-center col-md-3">Solicitante</th>
                   <th class="text-center col-md-2">Dt solicita&ccedil;&atilde;o</th>
-                  <th class="text-center col-md-1">Executar</th>                  
+                  <!-- <th class="text-center col-md-1">Executar</th>-->
                   <th class="text-center col-md-1">Geo</th>
-                  <th class="text-center col-md-1">Cancelar</th>
+                  <!-- <th class="text-center col-md-1">Cancelar</th> -->
                 </tr>
               </thead>
               <tbody id='tbListaUsuario'>
@@ -206,22 +206,6 @@
       });
     }
 
-    function cancelarOS(numOs, anoOs){
-      Swal({
-        title: 'Cancelar OS?',
-        text: "Deseja cancelar esta OS?",
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim'
-        cancelButtonText: 'N&atilde;o'
-      }).then((result) => {
-        if (result.value) {
-          window.location.replace("cancelaros.php?numos=".numOs."&anoos=".anoOs);
-        }
-      });
-    }
 
   </script>
 </body>
