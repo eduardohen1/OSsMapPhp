@@ -30,26 +30,13 @@
 					header("location:index.php");
 				}
 			}else{
-				$_SESSION['erro'] = "Usuario em branco.";
+				$_SESSION['erro'] = "Usu&aacute;rio n&atilde;o cadastrado.";
 				header("location:index.php");
 			}
 		}
 	}catch(PDOException $e){
 		$_SESSION['erro'] = "Erro ao consultar usuario: ".$e->getMessage();
 		header("location:index.php");
-	}
-
-
-
-
-		
-		$result = mysql_query($vSQL);
-		if($consulta = mysql_fetch_array($result)) {
-			
-		}else{
-			$_SESSION['erro'] = "Usu&aacute;rio n&atilde;o cadastrado.";
-			header("location:index.php");
-		}
 	}
 	
 ?>
