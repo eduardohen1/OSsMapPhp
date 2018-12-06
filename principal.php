@@ -24,11 +24,20 @@
   $conn              = "";
   $conexaoSysCliente = "";
 
-  require_once('conexao.php');
   function buscaOs(){
+    $host        = "autoatendimento.prosanearinfo.com.br";
+    $login       = "autoatendimento";
+    $senha       = "gest@123mgf";
+    $banco       = "ossmap";
+    $vvPortBanco = "3309";
+    $conn        = "";
+
     $resposta = "";
     try {      
-      $stmt = $conn->query("SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 1 order by vServico ASC");
+      $conn = new PDO("mysql:host=$host;dbname=$banco;port=$vvPortBanco", $login, $senha);	    
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
+      $vSQL = "SELECT CONCAT(ot.descricao,' ',LPAD(num_os,5,'0'),'.',ano_os,'-',dv_os) vServico, solicitante, DATE_FORMAT(dt_solicitacao,'%d/%m/%Y') vDtSolicitacao, o.num_os, o.ano_os FROM os o INNER JOIN os_tipo ot ON o.tipo_os = ot.tipo_os WHERE situacao = 1 order by vServico ASC";
+      $stmt = $conn->query($vSQL);
       /*
       while($vControle  = $stmt->fetch()){		
         $vvServico = $vControle["vServico"];
