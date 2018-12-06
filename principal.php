@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width" /><!-- Meta para responsibilidade -->
 	<title>OSsMap - Sistema de Ordens de Servi&ccedil;os</title>
 
-	<link rel="shortcut icon" href="http://autoatendimento.prosanearinfo.com.br/exec/testeOSsMap/images/OSsMap.ico" />
+	<link rel="shortcut icon" href="images/OSsMap.ico" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -14,7 +14,7 @@
         .well-shadow {  -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777; }
     </style>
 </head>
-<body style="padding: 50px 0;">	
+<body style="padding: 50px 0;" bgcolor="#607fbe">	
 	<?php		
 		$vvMensagem = "<strong>".$vvMensagem."</strong><br />Rotinas de suporte para gerenciamento do Sistema de Gest&atilde;o Comercial."		
 	?>

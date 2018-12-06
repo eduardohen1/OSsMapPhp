@@ -6,14 +6,13 @@
 	$vvSenha = $_POST["password"];
 	session_start();
 	if(strlen($vvUsuario) > 0){
-		$vSQL = "SELECT u.*, r.role FROM usuario u INNER JOIN usuario_roles r ON u.id = r.id_usuario WHERE u.username = '".ltrim(rtrim($vvUsuario))."' AND u.enabled = 1";
+		$vSQL = "SELECT u.*  FROM usuario u WHERE u.username = '".ltrim(rtrim($vvUsuario))."' AND u.enabled = 1";
 		$result = mysql_query($vSQL);
 		if($consulta = mysql_fetch_array($result)) {
 			$vvUsuarioID  = $consulta[id];
-			$vvSenhaBD    = $consulta[password];
-			$vvNome       = $consulta[nome];
-			$vRole        = $consulta[role];
-			$vTipoUsuario = $consulta[tipo];
+			$vvSenhaBD    = $consulta[senha];
+			$vvNome       = $consulta[nome];			
+			$vTipoUsuario = $consulta[tipoUsuario];
 			if(strtoupper(ltrim(rtrim($vvSenha))) == strtoupper(ltrim(rtrim($vvSenhaBD)))){
 				$_SESSION['idUsuario'] = $vvUsuarioID;
 				$_SESSION['mensagem'] = "Bem-vindo $vvNome!";
