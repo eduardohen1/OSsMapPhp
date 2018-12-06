@@ -1,3 +1,6 @@
+<?php
+  require_once('funcoes.php');
+?>
 <!DOCTYPE>
 <html lang="pt-br">
 <head>
@@ -45,15 +48,15 @@
         $vvNumOs         = $vControle["num_os"] ;
         $vvAnoOs         = $vControle["ano_os"];
         $vvLinkExecutar  = "<a href='concluiros.php?numos=".$vvNumOs."&anoos=".$vvAnoOs."' class='btn btn-success'><span class='glyphicon glyphicon-check' aria-hidden='true'></span></a>";        
-        if($vControle["num_os"] == 155){
+        if($vvNumOs == 155){
           $vvLinkGeo = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
         }else{
           $vvLinkGeo = "<a href='#' class='btn btn-info'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
         }        
         $vvLinkCancelar = "<a href='cancelaros.php?numos=".$vvNumOs."&anoos=".$vvAnoOs."' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
         $resposta .= "<tr>";
-        $resposta .= "<td>".$vvServico."</td>";
-        $resposta .= "<td>".$vvSolicitante."</td>";
+        $resposta .= "<td>".alterarCaracter($vvServico)."</td>";
+        $resposta .= "<td>".alterarCaracter($vvSolicitante)."</td>";
         $resposta .= "<td class='text-center'>".$vvDtSolicitacao."</td>";
         $resposta .= "<td class='text-center'>".$vvLinkExecutar."</td>";
         $resposta .= "<td class='text-center'>".$vvLinkGeo."</td>";
