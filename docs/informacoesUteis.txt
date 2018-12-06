@@ -1,0 +1,6 @@
+-- iniciando docker
+docker run --name server -itd -p 8080:80 eduardohmferreira/php-nginx
+-- entrando dentro da máquina
+docker attach server
+-- saindo da máquina sem desliga-la
+ctrl + p e q
