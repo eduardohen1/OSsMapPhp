@@ -51,13 +51,13 @@
         $vvDtSolicitacao = $vControle["vDtSolicitacao"];        
         $vvNumOs         = $vControle["num_os"] ;
         $vvAnoOs         = $vControle["ano_os"];
-        $vvLinkExecutar  = "<a href='javascript:concluirOS(".$vvNumOs.",".$vvAnoOs.")' class='btn btn-success'><span class='glyphicon glyphicon-check' aria-hidden='true'></span></a>";        
+        $vvLinkExecutar  = "<a href='javascript:concluirOS(".$vvNumOs.",".$vvAnoOs.");' class='btn btn-success'><span class='glyphicon glyphicon-check' aria-hidden='true'></span></a>";        
         if($vvNumOs == 155){
           $vvLinkGeo = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
         }else{
           $vvLinkGeo = "<a href='#' class='btn btn-info'><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span></a>";
         }        
-        $vvLinkCancelar = "<a href='javascript:cancelarOS(".$vvNumOs.",".$vvAnoOs.")' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
+        $vvLinkCancelar = "<a href='javascript:cancelarOS(".$vvNumOs.",".$vvAnoOs.");' class='btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
         $resposta .= "<tr>";
         $resposta .= "<td>".remover_caracter($vvServico)."</td>";
         $resposta .= "<td>".remover_caracter($vvSolicitante)."</td>";
@@ -201,7 +201,7 @@
         cancelButtonText: 'N&atilde;o'
       }).then((result) => {
         if (result.value) {
-          window.location.replace("concluiros.php?numos=".numOs."&anoos=".anoOs);
+          window.location.replace("concluiros.php?numos=" + numOs + "&anoos=" + anoOs);
         }
       });
     }
@@ -218,7 +218,7 @@
         cancelButtonText: 'N&atilde;o'
       }).then((result) => {
         if (result.value) {
-          window.location.replace("cancelaros.php?numos=".numOs."&anoos=".anoOs);
+          window.location.replace("cancelaros.php?numos=" + numOs + "&anoos=" + anoOs);
         }
       });
     }
