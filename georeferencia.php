@@ -110,120 +110,12 @@
       <div class="jumbotron">
         <h2>Georeferencia</h2>
         <p>&nbsp;</p>
-        <p>
-        <p id="demo">Clique no botão para obter sua localização:</p>
-        <button onclick="getLocation()">Clique aqui</button>
-         <div id="mapholder"></div>
-        </p>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="http://ehsolucoes.dyndns-at-home.com:8601/geoserver/minasgerais/wms?service=WMS&version=1.1.0&request=GetMap&layers=minasgerais:BRMUE250GC_SIR&styles=&bbox=-73.99044996899995,-33.751177994239676,-28.835907628999962,5.271841077172965&width=768&height=663&srs=EPSG:4674&format=application/openlayers" allowfullscreen>
+          </iframe>
+        </div>
 		  </div>
-    </div> <!-- /container -->
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title" id="myModalLabel">Liga&ccedil;&atilde;o nova 00155.2018-2</h4>
-		  </div>
-		  <div class="modal-body">
-      <img src="images/mapa02.png" alt="" class="img-responsive" />
-		  </div>
-		  <div class="modal-footer">		  	
-			<button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Fechar</button>			
-		  </div>
-		</div>
-	  </div>
-	</div>
-
-  <script type="text/javascript">
-		$('#myModal').on('shown.bs.modal', function () {
-		  //$("#lblContraChave").html(chave);
-		  $('#myInput').focus();		  
-    });
-    
-    function concluirOS(numOs, anoOs){
-      Swal({
-        title: 'Executar OS?',
-        text: "Deseja marcar que esta OS está executada?",
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim',
-        cancelButtonText: 'N&atilde;o'
-      }).then((result) => {
-        if (result.value) {
-          window.location.replace("concluiros.php?numos=" + numOs + "&anoos=" + anoOs);
-        }
-      });
-    }
-
-    function cancelarOS(numOs, anoOs){
-      Swal({
-        title: 'Cancelar OS?',
-        text: "Deseja cancelar esta OS?",
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim',
-        cancelButtonText: 'N&atilde;o'
-      }).then((result) => {
-        if (result.value) {
-          window.location.replace("cancelaros.php?numos=" + numOs + "&anoos=" + anoOs);
-        }
-      });
-    }
-
-  </script>
-  <script>
-var x=document.getElementById("demo");
-function getLocation()
-  {
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(showPosition,showError);
-    }
-  else{x.innerHTML="Geolocalização não é suportada nesse browser.";}
-  }
- 
-function showPosition(position)
-  {
-  lat=position.coords.latitude;
-  lon=position.coords.longitude;
-  latlon=new google.maps.LatLng(lat, lon)
-  mapholder=document.getElementById('mapholder')
-  mapholder.style.height='250px';
-  mapholder.style.width='500px';
- 
-  var myOptions={
-  center:latlon,zoom:14,
-  mapTypeId:google.maps.MapTypeId.ROADMAP,
-  mapTypeControl:false,
-  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-  };
-  var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
-  var marker=new google.maps.Marker({position:latlon,map:map,title:"Você está Aqui!"});
-  }
- 
-function showError(error)
-  {
-  switch(error.code)
-    {
-    case error.PERMISSION_DENIED:
-      x.innerHTML="Usuário rejeitou a solicitação de Geolocalização."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML="Localização indisponível."
-      break;
-    case error.TIMEOUT:
-      x.innerHTML="O tempo da requisição expirou."
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML="Algum erro desconhecido aconteceu."
-      break;
-    }
-  }
-</script>
+  </div> <!-- /container -->
+  
 </body>
 </html>
