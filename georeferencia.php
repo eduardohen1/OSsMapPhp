@@ -14,8 +14,7 @@
   <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/sweetalert2.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyB4ZCDyERah8If-1hhw37Dz7bJpNtcwWB0"></script>
+  <script type="text/javascript" src="js/sweetalert2.js"></script>  
   <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
@@ -110,7 +109,7 @@
       <div class="jumbotron">
         <h2>Georeferencia</h2>
         <p>&nbsp;</p>
-        
+
         <div class="embed-responsive embed-responsive-16by9">
           <iframe class="embed-responsive-item" src="http://ehsolucoes.dyndns-at-home.com:8601/geoserver/minasgerais/wms?service=WMS&version=1.1.0&request=GetMap&layers=minasgerais:BRMUE250GC_SIR&styles=&bbox=-73.99044996899995,-33.751177994239676,-28.835907628999962,5.271841077172965&width=768&height=663&srs=EPSG:4674&format=application/openlayers" allowfullscreen>
           </iframe>
