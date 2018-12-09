@@ -113,9 +113,7 @@
           <!-- <iframe class="embed-responsive-item" src="http://ehsolucoes.dyndns-at-home.com:8601/geoserver/minasgerais/wms?service=WMS&version=1.1.0&request=GetMap&layers=minasgerais:BRMUE250GC_SIR&styles=&bbox=-73.99044996899995,-33.751177994239676,-28.835907628999962,5.271841077172965&width=768&height=663&srs=EPSG:4674&format=application/openlayers" allowfullscreen> -->
             <a href="http://ehsolucoes.dyndns-at-home.com:8601/geoserver/minasgerais/wms?service=WMS&version=1.1.0&request=GetMap&layers=minasgerais:BRMUE250GC_SIR&styles=&bbox=-73.99044996899995,-33.751177994239676,-28.835907628999962,5.271841077172965&width=768&height=663&srs=EPSG:4674&format=application/openlayers" class="btn btn-lg btn-primary" target="_new">
               <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Mapa
-            </a>
-          <iframe src="" allowfullscreen>
-          </iframe>
+            </a>          
         </div>
 		  </div>
   </div> <!-- /container -->
